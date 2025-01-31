@@ -93,6 +93,41 @@ class Solution:
 
         return length
 
+    # Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".
+    def longestCommonPrefix(self, strs: list[str]) -> str:
+        # if len(strs) == 1:
+        #     return strs[0]
+
+        # strs.sort()
+        # longest_prefix = []
+        # first, last = strs[0], strs[-1]
+
+        # if not first or not last or first[0] != last [0]:
+        #     return ""
+
+        # for i, letter in enumerate(first):
+        #     if last[i] and last[i] == letter:
+        #         longest_prefix.append(letter)
+        #     else:
+        #         break
+
+        # return "".join(longest_prefix)
+        if not strs:
+            return ""
+        
+        prefix = strs[0]
+
+        for string in strs[1:]:
+
+            while string.startswith(prefix):
+                prefix=prefix[:-1]
+                if not prefix:
+                    return ""
+        return prefix
+
+
+
+print(Solution().longestCommonPrefix(["flower","flow","flight"]))
 # print("result",Solution().twoSum([2,7,11,15], 9))
 # print(Solution().isPalindrome(0))
 # print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
