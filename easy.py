@@ -76,12 +76,27 @@ class Solution:
                 return i
         return len(nums)
 
-    # You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's. Increment the large integer by one and return the resulting array of digits.
+    # Given a string s consisting of words and spaces, return the length of the last word in the string.
+    def lengthOfLastWord(self, s: str) -> int:
+        # split_str = [word for word in s.split(" ") if word is not ""]
+        # return len(split_str[-1])
 
+        length = 0
+        i = len(s) - 1
+
+        while i >= 0 and s[i] == ' ':
+            i -= 1
+
+        while i >= 0 and s[i] != ' ':
+            length += 1
+            i -= 1
+
+        return length
 
 # print("result",Solution().twoSum([2,7,11,15], 9))
 # print(Solution().isPalindrome(0))
 # print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
 # print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
 # print(Solution().strStr("sabutsad", "sad"))
-print(Solution().searchInsert([1,3,5,6], 5))
+# print(Solution().searchInsert([1,3,5,6], 5))
+# print(Solution().lengthOfLastWord("   fly me   to   the moon  "))
