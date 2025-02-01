@@ -71,6 +71,7 @@ class Solution:
 
     # Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. You must write an algorithm with O(log n) runtime complexity.
     def searchInsert(self, nums: list[int], target: int) -> int:
+        # TODO
         for i, num in enumerate(nums):
             if num >= target:
                 return i
@@ -125,9 +126,42 @@ class Solution:
                     return ""
         return prefix
 
+    # You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's. Increment the large integer by one and return the resulting array of digits.
+    def plusOne(self, digits: list[int]) -> list[int]:
+        # digits.reverse() # O(n)
+        # result = []
+        # carry = 0
+
+        # for i, num in enumerate(digits): # O(n)
+        #     if i == 0:
+        #         if num == 9:
+        #             result.append(0)
+        #             carry = 1
+        #             if i == len(digits) - 1:
+        #                 result.append(1)
+        #         else:
+        #             result.append(num + 1)
+        #     elif num == 9 and carry == 1:
+        #         result.append(0)
+        #         if i == len(digits) - 1:
+        #             result.append(1)
+        #     else:
+        #         result.append(num + carry)
+        #         carry = 0
+        # result.reverse() # O(n)
+        # return result
+
+        n = len(digits)
+        for i in range(n-1, -1, -1):
+            if digits[i] < 9:
+                digits[i] += 1
+                return digits
+            digits[i] = 0
+        return [1] + digits
 
 
-print(Solution().longestCommonPrefix(["flower","flow","flight"]))
+print(Solution().plusOne([9, 9]))
+# print(Solution().longestCommonPrefix(["flower","flow","flight"]))
 # print("result",Solution().twoSum([2,7,11,15], 9))
 # print(Solution().isPalindrome(0))
 # print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
