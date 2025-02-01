@@ -1,7 +1,9 @@
 class Solution:
 
-    # Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
     def twoSum(self, nums: list[int], target: int) -> list[int]:
+        '''
+        Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+        '''
         # for i, num in enumerate(nums):
         #     for j in range(i + 1, len(nums)):
         #         if target - num == nums[j]:
@@ -31,16 +33,22 @@ class Solution:
             print(num_map)
         return []
 
-    # Given an integer x, return true if x is a palindrome, and false otherwise.
+
     def isPalindrome(self, x: int) -> bool:
+        '''
+        Given an integer x, return true if x is a palindrome, and false otherwise.
+        '''
         if x < 0 or (x > 0 and x % 10 == 0):
             return False
         num = list(str(x))
         palindrome = "".join(num[::-1])
         return bool(str(x) == palindrome)
 
-    # Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+
     def removeDuplicates(self, nums: list[int]) -> int:
+        '''
+        Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+        '''
         # my_set = set(nums)
         # k = len(my_set)
         # print(my_set, k)
@@ -53,32 +61,44 @@ class Solution:
                 j +=1
         return j, nums
     
-    # Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
     def removeElement(self, nums: list[int], val: int) -> int:
+        '''
+        Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+        '''
         j = 1
         for i in range(1, len(nums)):
             if nums[i] == val:
                 nums[i] = nums[i-1]
         return nums
     
-    # Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
     def strStr(self, haystack: str, needle: str) -> int:
+        '''
+        Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+        '''
         if len(needle) > len(haystack):
             return -1
         lps = []
         # for i in range(0, len(haystack)):
             # if 
 
-    # Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. You must write an algorithm with O(log n) runtime complexity.
+
     def searchInsert(self, nums: list[int], target: int) -> int:
+        '''
+        Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. You must write an algorithm with O(log n) runtime complexity.
+        '''
         # TODO
         for i, num in enumerate(nums):
             if num >= target:
                 return i
         return len(nums)
 
-    # Given a string s consisting of words and spaces, return the length of the last word in the string.
+
     def lengthOfLastWord(self, s: str) -> int:
+        '''
+        Given a string s consisting of words and spaces, return the length of the last word in the string.
+        '''
         # split_str = [word for word in s.split(" ") if word is not ""]
         # return len(split_str[-1])
 
@@ -94,8 +114,11 @@ class Solution:
 
         return length
 
-    # Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".
+
     def longestCommonPrefix(self, strs: list[str]) -> str:
+        '''
+        Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".
+        '''
         # if len(strs) == 1:
         #     return strs[0]
 
@@ -126,8 +149,11 @@ class Solution:
                     return ""
         return prefix
 
-    # You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's. Increment the large integer by one and return the resulting array of digits.
+
     def plusOne(self, digits: list[int]) -> list[int]:
+        '''
+        You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's. Increment the large integer by one and return the resulting array of digits.
+        '''
         # digits.reverse() # O(n)
         # result = []
         # carry = 0
@@ -160,8 +186,10 @@ class Solution:
         return [1] + digits
 
 
-    # An array is considered special if every pair of its adjacent elements contains two numbers with different parity. You are given an array of integers nums. Return true if nums is a special array, otherwise, return false.
     def isArraySpecial(self, nums: list[int]) -> bool:
+        '''
+        An array is considered special if every pair of its adjacent elements contains two numbers with different parity. You are given an array of integers nums. Return true if nums is a special array, otherwise, return false.
+        '''
         if len(nums) == 1:
             return True
         for i in range(0, len(nums)-1):
@@ -174,13 +202,13 @@ class Solution:
 
 
 
-print(Solution().isArraySpecial([2,1,4]))
+# print(Solution().isArraySpecial([2,1,4]))
 # print(Solution().plusOne([9, 9]))
 # print(Solution().longestCommonPrefix(["flower","flow","flight"]))
 # print("result",Solution().twoSum([2,7,11,15], 9))
 # print(Solution().isPalindrome(0))
 # print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
-# print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
+print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
 # print(Solution().strStr("sabutsad", "sad"))
 # print(Solution().searchInsert([1,3,5,6], 5))
 # print(Solution().lengthOfLastWord("   fly me   to   the moon  "))
