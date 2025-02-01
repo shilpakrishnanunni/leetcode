@@ -160,7 +160,22 @@ class Solution:
         return [1] + digits
 
 
-print(Solution().plusOne([9, 9]))
+    # An array is considered special if every pair of its adjacent elements contains two numbers with different parity. You are given an array of integers nums. Return true if nums is a special array, otherwise, return false.
+    def isArraySpecial(self, nums: list[int]) -> bool:
+        if len(nums) == 1:
+            return True
+        for i in range(0, len(nums)-1):
+            # print(f"{nums[i]} % 2",nums[i] % 2,f"{nums[i+1]} % 2",nums[i+1] % 2)
+            if (nums[i] % 2) == (nums[i+1] % 2):
+                return False
+        return True
+            
+        
+
+
+
+print(Solution().isArraySpecial([2,1,4]))
+# print(Solution().plusOne([9, 9]))
 # print(Solution().longestCommonPrefix(["flower","flow","flight"]))
 # print("result",Solution().twoSum([2,7,11,15], 9))
 # print(Solution().isPalindrome(0))
