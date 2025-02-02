@@ -199,16 +199,48 @@ class Solution:
         return True
             
         
+    def checkRotatedArray(self, nums: list[int]) -> bool:
+        '''
+        Given an array nums, return true if the array was originally sorted in non-decreasing order, then rotated some number of positions (including zero). Otherwise, return false.
 
+        There may be duplicates in the original array.
 
+        Note: An array A rotated by x positions results in an array B of the same length such that A[i] == B[(i+x) % A.length], where % is the modulo operation.
+        '''
+        # def degree_of_rotation(arr):
+        #     for i in range(0, len(arr)):
+        #         if arr[i] < arr[i-1]:
+        #             if arr[i] < arr[0]:
+        #                 return i
+        # org_nums = nums[:]
+        # rot = degree_of_rotation(org_nums)
+        # if not rot:
+        #     rot = 0
+        # nums.sort()
+        # length = len(nums)
+        # for i in range(length):
+        #     if nums[i] != org_nums[(i+rot) % length]:
+        #         return False
 
+        # return True
+        count = 0
+        n = len(nums)
+
+        for i in range(n):
+            if nums[i] > nums[(i + 1) % n]:
+                count += 1
+            if count > 1:
+                return False
+        return True
+
+print(Solution().checkRotatedArray([6,10,6]))
 # print(Solution().isArraySpecial([2,1,4]))
 # print(Solution().plusOne([9, 9]))
 # print(Solution().longestCommonPrefix(["flower","flow","flight"]))
 # print("result",Solution().twoSum([2,7,11,15], 9))
 # print(Solution().isPalindrome(0))
 # print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
-print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
+# print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
 # print(Solution().strStr("sabutsad", "sad"))
 # print(Solution().searchInsert([1,3,5,6], 5))
 # print(Solution().lengthOfLastWord("   fly me   to   the moon  "))
