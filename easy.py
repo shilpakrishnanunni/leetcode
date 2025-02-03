@@ -233,7 +233,36 @@ class Solution:
                 return False
         return True
 
-print(Solution().checkRotatedArray([6,10,6]))
+
+    def longestMonotonicSubarray(self, nums: list[int]) -> int:
+        '''
+        You are given an array of integers nums. Return the length of the longest subarray of nums which is either strictly increasing or strictly decreasing.
+        '''
+        n = len(nums)
+        inc = 1
+        dec = 1
+        longest = 1
+
+        for i in range(1,n):
+            print(nums[i-1], nums[i],)
+            if nums[i] > nums[i-1]:
+                inc += 1
+                dec = 1
+            elif nums[i] < nums[i-1]:
+                dec += 1
+                inc = 1
+            elif nums[i] == nums[i-1]:
+                inc = 1
+                dec = 1
+            print(f"inc {inc} dec {dec}")
+            longest = max(longest, inc, dec)
+        return longest
+        
+
+
+
+print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
+# print(Solution().checkRotatedArray([6,10,6]))
 # print(Solution().isArraySpecial([2,1,4]))
 # print(Solution().plusOne([9, 9]))
 # print(Solution().longestCommonPrefix(["flower","flow","flight"]))
