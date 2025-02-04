@@ -71,17 +71,6 @@ class Solution:
             if nums[i] == val:
                 nums[i] = nums[i-1]
         return nums
-    
-
-    def strStr(self, haystack: str, needle: str) -> int:
-        '''
-        Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-        '''
-        if len(needle) > len(haystack):
-            return -1
-        lps = []
-        # for i in range(0, len(haystack)):
-            # if 
 
 
     def searchInsert(self, nums: list[int], target: int) -> int:
@@ -314,11 +303,56 @@ class Solution:
         return True
 
 
+    def strStr(self, haystack: str, needle: str) -> int:
+        '''
+        Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+        '''
+        m, n = len(needle), len(haystack)
+        if m == 0:
+            return 0
+        if m > n:
+            return -1
+
+        # for i in range(n - m + 1):
+        #     # j = 0
+        #     # while j < len(needle) and haystack[i+j] == needle[j]:
+        #     #     j+=1
+        #     # if j == len(needle):
+        #     #     return i
+        #     if haystack[i:i+m] == needle:
+        #         return i
+        # return -1
+
+        ## KMP algorithm O(n+m)
+        lps = [0] * m
+        j = 0
+        # Preprocess the pattern to build the LPS table
+        for i in range(1, m):
+            # print(needle[i], needle[j])
+            while j > 0 and needle[i] != needle[j]:
+                j = lps[j - 1]
+            if needle[i] == needle[j]:
+                j += 1
+            lps[i] = j
+            # print(f"j {j} lps {lps}")
+        print(lps)
+
+        # Perform the search
+        j = 0
+        for i in range(n):
+            while j > 0 and haystack[i] != needle[j]:
+                j = lps[j - 1]
+            if haystack[i] == needle[j]:
+                j += 1
+            if j == m:
+                return i - m + 1
+
+        return -1
 
 
 
-
-print(Solution().isValid("){"))
+print(Solution().strStr("ababcabcabababd", "ababd"))
+# print(Solution().isValid("){"))
 # print(Solution().maxAscendingSum([10,20,30,5,10,50]))
 # print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
 # print(Solution().checkRotatedArray([6,10,6]))
@@ -329,6 +363,5 @@ print(Solution().isValid("){"))
 # print(Solution().isPalindrome(0))
 # print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
 # print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
-# print(Solution().strStr("sabutsad", "sad"))
 # print(Solution().searchInsert([1,3,5,6], 5))
 # print(Solution().lengthOfLastWord("   fly me   to   the moon  "))
