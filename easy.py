@@ -268,9 +268,9 @@ class Solution:
         A subarray [numsl, numsl+1, ..., numsr-1, numsr] is ascending if for all i where l <= i < r, numsi  < numsi+1. Note that a subarray of size 1 is ascending.
         '''
         n = len(nums)
-        largest_sum = 0
-        sum = 0
-        for i in range(n):
+        largest_sum = nums[0]
+        sum = nums[0]
+        for i in range(1,n):
             if nums[i] <= nums[i-1]:
                 sum = nums[i]
             else:
@@ -280,8 +280,46 @@ class Solution:
         return largest_sum
 
 
+    def isValid(self, s: str) -> bool:
+        '''
+        Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
-print(Solution().maxAscendingSum([10,20,30,5,10,50]))
+        An input string is valid if:
+
+        1) Open brackets must be closed by the same type of brackets.
+
+        2) Open brackets must be closed in the correct order.
+
+        3) Every close bracket has a corresponding open bracket of the same type.
+
+        '''
+        if len(s) % 2 != 0:
+            return False
+        flag_order_arr = []
+        my_hash = {
+            ")": "(",
+            "}": "{",
+            "]": "["
+        }
+        for i in s:
+            if i in ["(", "{", "["]:
+                flag_order_arr.append(i)
+            if i in [")", "}", "]"]:
+                if len(flag_order_arr) > 0 and flag_order_arr[-1] == my_hash[i]:
+                    flag_order_arr.pop()
+                else:
+                    return False
+        if len(flag_order_arr) > 0:
+            return False
+        return True
+
+
+
+
+
+
+print(Solution().isValid("){"))
+# print(Solution().maxAscendingSum([10,20,30,5,10,50]))
 # print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
 # print(Solution().checkRotatedArray([6,10,6]))
 # print(Solution().isArraySpecial([2,1,4]))
