@@ -258,10 +258,31 @@ class Solution:
             longest = max(longest, inc, dec)
         return longest
         
+    
+    def maxAscendingSum(self, nums: list[int]) -> int:
+        '''
+        Given an array of positive integers nums, return the maximum possible sum of an ascending subarray in nums.
+
+        A subarray is defined as a contiguous sequence of numbers in an array.
+
+        A subarray [numsl, numsl+1, ..., numsr-1, numsr] is ascending if for all i where l <= i < r, numsi  < numsi+1. Note that a subarray of size 1 is ascending.
+        '''
+        n = len(nums)
+        largest_sum = 0
+        sum = 0
+        for i in range(n):
+            if nums[i] <= nums[i-1]:
+                sum = nums[i]
+            else:
+                sum += nums[i]
+            largest_sum = max(largest_sum, sum)
+            # print(f"nums[i] {nums[i]} sum {sum} largest_sum {largest_sum}")
+        return largest_sum
 
 
 
-print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
+print(Solution().maxAscendingSum([10,20,30,5,10,50]))
+# print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
 # print(Solution().checkRotatedArray([6,10,6]))
 # print(Solution().isArraySpecial([2,1,4]))
 # print(Solution().plusOne([9, 9]))
