@@ -356,38 +356,25 @@ class Solution:
 
         Return true if it is possible to make both strings equal by performing at most one string swap on exactly one of the strings. Otherwise, return false.
         '''
-        not_equal_count = 0
-        n = len(s1)
-        my_hash = {}
-        for i in range(n):
-            print(f"s1[i] {s1[i]}")
-            if s1[i] not in s2:
-                return False
-            if s2[i] != s1[i]:
-                not_equal_count += 1
-                if not_equal_count > 2:
+        mismatch = []
+
+        for i in range(len(s1)):
+            if s1[i] != s2[i]:
+                mismatch.append(i)
+                if len(mismatch) > 2:
                     return False
-                my_hash[s2[i]] = i
-                print("temp hash ",my_hash)
-                if not_equal_count == 2:
-                    print("check switch", s1[i], my_hash)
-                    if s1[i] not in my_hash:
-                        return False
-                    print(f"my_hash[{s2[i]}] {my_hash[s2[i]]} i {i}")
-                    if my_hash[s2[i]] != i:
-                        print("uh oh")
-                        return False
-        if len(my_hash) % 2 != 0:
-            return False
-        print("final hash",my_hash)
-        return True
+        if len(mismatch) == 0:
+            return True
+        if len(mismatch) == 2:
+            i, j = mismatch
+            return s1[i] == s2[j] and s1[j] == s2[i]
+
+        return False
 
 
 
 
-# print(Solution().areAlmostEqual("bank", "kanb"))
 print(Solution().areAlmostEqual("bankb", "kannb"))
-# print(Solution().areAlmostEqual("akrjnhuojtkhlqdfifwxbsmphhcchuqcconcvplcyxjpi", "akrjnhuojtkhlxdfifwqbsmphhcchuqcconcvplcyxjpi"))
 # print(Solution().strStr("ababcabcabababd", "ababd"))
 # print(Solution().isValid("){"))
 # print(Solution().maxAscendingSum([10,20,30,5,10,50]))
