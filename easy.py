@@ -350,8 +350,45 @@ class Solution:
         return -1
 
 
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        '''
+        You are given two strings s1 and s2 of equal length. A string swap is an operation where you choose two indices in a string (not necessarily different) and swap the characters at these indices.
 
-print(Solution().strStr("ababcabcabababd", "ababd"))
+        Return true if it is possible to make both strings equal by performing at most one string swap on exactly one of the strings. Otherwise, return false.
+        '''
+        not_equal_count = 0
+        n = len(s1)
+        my_hash = {}
+        for i in range(n):
+            print(f"s1[i] {s1[i]}")
+            if s1[i] not in s2:
+                return False
+            if s2[i] != s1[i]:
+                not_equal_count += 1
+                if not_equal_count > 2:
+                    return False
+                my_hash[s2[i]] = i
+                print("temp hash ",my_hash)
+                if not_equal_count == 2:
+                    print("check switch", s1[i], my_hash)
+                    if s1[i] not in my_hash:
+                        return False
+                    print(f"my_hash[{s2[i]}] {my_hash[s2[i]]} i {i}")
+                    if my_hash[s2[i]] != i:
+                        print("uh oh")
+                        return False
+        if len(my_hash) % 2 != 0:
+            return False
+        print("final hash",my_hash)
+        return True
+
+
+
+
+# print(Solution().areAlmostEqual("bank", "kanb"))
+print(Solution().areAlmostEqual("bankb", "kannb"))
+# print(Solution().areAlmostEqual("akrjnhuojtkhlqdfifwxbsmphhcchuqcconcvplcyxjpi", "akrjnhuojtkhlxdfifwqbsmphhcchuqcconcvplcyxjpi"))
+# print(Solution().strStr("ababcabcabababd", "ababd"))
 # print(Solution().isValid("){"))
 # print(Solution().maxAscendingSum([10,20,30,5,10,50]))
 # print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
