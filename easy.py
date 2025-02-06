@@ -384,59 +384,26 @@ class Solution:
         (2,10,4,5) , (2,10,5,4) , (10,2,4,5) , (10,2,5,4)
         (4,5,2,10) , (4,5,10,2) , (5,4,2,10) , (5,4,10,2)
         '''
-        def factorial(num):
-            fact = 1
-            for i in range(1, num+1):
-                fact = fact * i
-            print(f"factorial of {num} is {fact}")
-            return fact
-
+        from collections import defaultdict
+        product_count = defaultdict(int)
         n = len(nums)
-        r = 2
-        total_permutations = factorial(n) / factorial(n-r) # O(n), O(n-r)
-        total_combinations = factorial(n) / (factorial(r) * factorial(n-r))
-        # total_combinations = (n * (n-1) * (n-r-1)) / factorial(r)
-        print(f"total_permutations {total_permutations} total_combinations {total_combinations}")
-        c_arr = []
-        # tuple_arr = []
-        my_hash = {}
-        hash2 = {}
+
         for i in range(n):
-            j = 0
-            while j < n:
-                if nums[i] != nums[j]:
-                    # if (nums[j], nums[i]) not in c_arr:
-                    c_arr.append((nums[i], nums[j]))
-                    my_hash[f"{nums[i]} * {nums[j]}"] = nums[i] * nums[j]
-                    # tuple_arr.append(((nums[i], nums[j]), nums[i] * nums[j]))
-                j +=1
+            for j in range(i + 1, n):
+                product = nums[i] * nums[j]
+                product_count[product] += 1
 
-        # for key, value in tuple_arr:
-        for key, value in my_hash.items():
-            print(value)
+        print(product_count)
+        result = 0
+        for count in product_count.values():
+            if count > 1:
+                result += (count * (count - 1)) // 2 * 8
 
-        # print("hash2",hash2)
-        return my_hash
-
-op_hash = {
-    '2 * 3': 6, 
-    '2 * 4': 8, 
-    '2 * 6': 12, 
-    '3 * 2': 6, 
-    '3 * 4': 12, 
-    '3 * 6': 18, 
-    '4 * 2': 8, 
-    '4 * 3': 12, 
-    '4 * 6': 24, 
-    '6 * 2': 12, 
-    '6 * 3': 18, 
-    '6 * 4': 24
-}
+        return result
 
 
 
-
-print(Solution().tupleSameProduct([2,3,4,6]))
+print(Solution().tupleSameProduct([1,2,4,5,10]))
 # print(Solution().areAlmostEqual("bankb", "kannb"))
 # print(Solution().strStr("ababcabcabababd", "ababd"))
 # print(Solution().isValid("){"))
