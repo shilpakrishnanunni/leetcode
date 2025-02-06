@@ -372,9 +372,72 @@ class Solution:
         return False
 
 
+    def tupleSameProduct(self, nums: list[int]) -> int:
+        '''
+        Given an array nums of distinct positive integers, return the number of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d are elements of nums, and a != b != c != d.
+        Hint: Count the frequency of each product of 2 distinct numbers. Then calculate the permutations formed.
+        eg.
+        nums = [1,2,4,5,10]
+        There are 16 valid tuples:
+        (1,10,2,5) , (1,10,5,2) , (10,1,2,5) , (10,1,5,2)
+        (2,5,1,10) , (2,5,10,1) , (5,2,1,10) , (5,2,10,1)
+        (2,10,4,5) , (2,10,5,4) , (10,2,4,5) , (10,2,5,4)
+        (4,5,2,10) , (4,5,10,2) , (5,4,2,10) , (5,4,10,2)
+        '''
+        def factorial(num):
+            fact = 1
+            for i in range(1, num+1):
+                fact = fact * i
+            print(f"factorial of {num} is {fact}")
+            return fact
+
+        n = len(nums)
+        r = 2
+        total_permutations = factorial(n) / factorial(n-r) # O(n), O(n-r)
+        total_combinations = factorial(n) / (factorial(r) * factorial(n-r))
+        # total_combinations = (n * (n-1) * (n-r-1)) / factorial(r)
+        print(f"total_permutations {total_permutations} total_combinations {total_combinations}")
+        c_arr = []
+        # tuple_arr = []
+        my_hash = {}
+        hash2 = {}
+        for i in range(n):
+            j = 0
+            while j < n:
+                if nums[i] != nums[j]:
+                    # if (nums[j], nums[i]) not in c_arr:
+                    c_arr.append((nums[i], nums[j]))
+                    my_hash[f"{nums[i]} * {nums[j]}"] = nums[i] * nums[j]
+                    # tuple_arr.append(((nums[i], nums[j]), nums[i] * nums[j]))
+                j +=1
+
+        # for key, value in tuple_arr:
+        for key, value in my_hash.items():
+            print(value)
+
+        # print("hash2",hash2)
+        return my_hash
+
+op_hash = {
+    '2 * 3': 6, 
+    '2 * 4': 8, 
+    '2 * 6': 12, 
+    '3 * 2': 6, 
+    '3 * 4': 12, 
+    '3 * 6': 18, 
+    '4 * 2': 8, 
+    '4 * 3': 12, 
+    '4 * 6': 24, 
+    '6 * 2': 12, 
+    '6 * 3': 18, 
+    '6 * 4': 24
+}
 
 
-print(Solution().areAlmostEqual("bankb", "kannb"))
+
+
+print(Solution().tupleSameProduct([2,3,4,6]))
+# print(Solution().areAlmostEqual("bankb", "kannb"))
 # print(Solution().strStr("ababcabcabababd", "ababd"))
 # print(Solution().isValid("){"))
 # print(Solution().maxAscendingSum([10,20,30,5,10,50]))
