@@ -402,8 +402,44 @@ class Solution:
         return result
 
 
+    def queryResults(self, limit: int, queries: list[list[int]]) -> list[int]:
+        '''
+        There are limit + 1 balls with distinct labels in the range [0, limit]. Initially, all balls are uncolored. For every query in queries that is of the form [x, y], you mark ball x with the color y. After each query, you need to find the number of distinct colors among the balls.
 
-print(Solution().tupleSameProduct([1,2,4,5,10]))
+        Return an array result of length n, where result[i] denotes the number of distinct colors after ith query.
+
+        Note that when answering a query, lack of a color will not be considered as a color.
+        '''
+
+        # ball_hash = {}
+        # result = []
+        # for ball, color in queries:
+        #     if color not in ball_hash.values():
+        #         ball_hash[ball] = color
+        #     result.append(len(ball_hash.keys()))
+        # return result
+        
+        from collections import defaultdict
+        ball_hash = {}
+        color_count = defaultdict(int)
+        result = []
+
+        for ball, color in queries:
+            if ball in ball_hash:
+                old_color = ball_hash[ball]
+                color_count[old_color] -= 1
+                if color_count[old_color] == 0:
+                    del color_count[old_color]
+            
+            ball_hash[ball] = color
+            color_count[color] += 1
+
+            result.append(len(color_count))
+        return result
+
+
+print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
+# print(Solution().tupleSameProduct([1,2,4,5,10]))
 # print(Solution().areAlmostEqual("bankb", "kannb"))
 # print(Solution().strStr("ababcabcabababd", "ababd"))
 # print(Solution().isValid("){"))
