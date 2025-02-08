@@ -438,7 +438,49 @@ class Solution:
         return result
 
 
-print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
+class NumberContainers:
+    '''
+    Design a number container system that can do the following:
+
+    Insert or Replace a number at the given index in the system.
+    Return the smallest index for the given number in the system.
+
+    Implement the NumberContainers class:
+
+    NumberContainers() Initializes the number container system.
+    void change(int index, int number) Fills the container at index with the number. If there is already a number at that index, replace it.
+    int find(int number) Returns the smallest index for the given number, or -1 if there is no index that is filled by number in the system.
+
+    '''
+
+    def __init__(self):
+        self.num = []
+
+    def change(self, index: int, number: int) -> None:
+        n = len(self.num)
+        if n < index + 1:
+            self.num.extend(0 for _ in range(0, index - n + 1))
+        self.num[index] = number
+        
+
+    def find(self, number: int) -> int:
+        for i, value in enumerate(self.num):
+            if value == number:
+                return i
+        return -1
+
+
+nc = NumberContainers()
+print(nc.find(10))
+nc.change(2, 10)
+nc.change(1, 10)
+nc.change(3, 10)
+nc.change(5, 10)
+print(nc.find(10))
+nc.change(1, 20)
+print(nc.find(10))
+
+# print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
 # print(Solution().tupleSameProduct([1,2,4,5,10]))
 # print(Solution().areAlmostEqual("bankb", "kannb"))
 # print(Solution().strStr("ababcabcabababd", "ababd"))
