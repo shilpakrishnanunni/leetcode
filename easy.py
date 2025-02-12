@@ -438,6 +438,41 @@ class Solution:
         return result
 
 
+    def maximumSum(self, nums: list[int]) -> int:
+        '''
+        You are given a 0-indexed array nums consisting of positive integers. You can choose two indices i and j, such that i != j, and the sum of digits of the number nums[i] is equal to that of nums[j].
+
+        Return the maximum value of nums[i] + nums[j] that you can obtain over all possible indices i and j that satisfy the conditions.
+        '''
+        from collections import defaultdict
+        digit_sum_count = defaultdict(list)
+        max_sum = -1
+        for i in nums:
+            digits = [int(j) for j in list(str(i))]
+            digit_sum = sum(digits)
+            digit_sum_count[digit_sum] += [i]
+        for count in digit_sum_count.values():
+            n = len(count)
+            if n >= 2:
+                if count[0] > count[1]:
+                    first, second = count[0], count[1]
+                else:
+                    first, second = count[1], count[0]
+                for i in range(2, n):
+                    if count[i] > first:
+                        second = first
+                        first = count[i]
+                    elif count[i] > second:
+                        second = count[i]
+                max_sum = max(max_sum, first+second)
+        return max_sum
+
+
+
+
+
+print(Solution().maximumSum([10,12,19,14]))
+
 class NumberContainers:
     '''
     Design a number container system that can do the following:
@@ -470,15 +505,18 @@ class NumberContainers:
         return -1
 
 
-nc = NumberContainers()
-print(nc.find(10))
-nc.change(2, 10)
-nc.change(1, 10)
-nc.change(3, 10)
-nc.change(5, 10)
-print(nc.find(10))
-nc.change(1, 20)
-print(nc.find(10))
+# nc = NumberContainers()
+# print(nc.find(10))
+# nc.change(2, 10)
+# nc.change(1, 10)
+# nc.change(3, 10)
+# nc.change(5, 10)
+# print(nc.find(10))
+# nc.change(1, 20)
+# print(nc.find(10))
+
+
+
 
 # print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
 # print(Solution().tupleSameProduct([1,2,4,5,10]))
