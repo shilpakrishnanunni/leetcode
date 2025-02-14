@@ -468,10 +468,61 @@ class Solution:
         return max_sum
 
 
+    def minOperations(self, nums: list[int], k: int) -> int:
+        '''
+        You are given a 0-indexed integer array nums, and an integer k. In one operation, you will:
+
+        Take the two smallest integers x and y in nums.
+        Remove x and y from nums.
+        Add min(x, y) * 2 + max(x, y) anywhere in the array.
+
+        Note that you can only apply the described operation if nums contains at least two elements.
+        Return the minimum number of operations needed so that all elements of the array are greater than or equal to k.
+        '''
+        # op_num = 0
+        # if len(nums) < 2:
+        #     return op_num
+
+        # new_nums = [i for i in nums if i <= k]
+        # if len(new_nums) < 2:
+        #     return op_num
+
+        # while min(new_nums) < k:
+        #     x = min(new_nums)
+        #     new_nums.remove(x)
+
+        #     y = min(new_nums)
+        #     new_nums.remove(y)
+
+        #     total = min(x, y) * 2 + max(x, y)
+        #     print("x",x, "y",y, "total", total)
+
+        #     new_nums.append(total)
+        #     print(new_nums)
+
+        #     op_num += 1
+        # return op_num
+        import heapq
+
+        heapq.heapify(nums)
+        op_num = 0
+
+        while nums[0] < k:
+            if len(nums) < 2:
+                return op_num
+            x = heapq.heappop(nums)
+            y = heapq.heappop(nums)
+            new_value = min(x, y) * 2 + max(x, y)
+            heapq.heappush(nums, new_value)
+
+            op_num += 1
+        return op_num
 
 
 
-print(Solution().maximumSum([10,12,19,14]))
+
+print(Solution().minOperations([2,11,10,1,3], 10))
+# print(Solution().maximumSum([10,12,19,14]))
 
 class NumberContainers:
     '''
