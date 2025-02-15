@@ -523,6 +523,24 @@ class Solution:
 
 print(Solution().minOperations([2,11,10,1,3], 10))
 # print(Solution().maximumSum([10,12,19,14]))
+# print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
+# print(Solution().tupleSameProduct([1,2,4,5,10]))
+# print(Solution().areAlmostEqual("bankb", "kannb"))
+# print(Solution().strStr("ababcabcabababd", "ababd"))
+# print(Solution().isValid("){"))
+# print(Solution().maxAscendingSum([10,20,30,5,10,50]))
+# print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
+# print(Solution().checkRotatedArray([6,10,6]))
+# print(Solution().isArraySpecial([2,1,4]))
+# print(Solution().plusOne([9, 9]))
+# print(Solution().longestCommonPrefix(["flower","flow","flight"]))
+# print("result",Solution().twoSum([2,7,11,15], 9))
+# print(Solution().isPalindrome(0))
+# print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
+# print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
+# print(Solution().searchInsert([1,3,5,6], 5))
+# print(Solution().lengthOfLastWord("   fly me   to   the moon  "))
+
 
 class NumberContainers:
     '''
@@ -567,22 +585,43 @@ class NumberContainers:
 # print(nc.find(10))
 
 
+class ProductOfNumbers:
+    '''
+    Design an algorithm that accepts a stream of integers and retrieves the product of the last k integers of the stream.
+    Implement the ProductOfNumbers class:
 
+    ProductOfNumbers() Initializes the object with an empty stream.
+    void add(int num) Appends the integer num to the stream.
+    int getProduct(int k) Returns the product of the last k numbers in the current list. You can assume that always the current list has at least k numbers.
 
-# print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
-# print(Solution().tupleSameProduct([1,2,4,5,10]))
-# print(Solution().areAlmostEqual("bankb", "kannb"))
-# print(Solution().strStr("ababcabcabababd", "ababd"))
-# print(Solution().isValid("){"))
-# print(Solution().maxAscendingSum([10,20,30,5,10,50]))
-# print(Solution().longestMonotonicSubarray([1,4,5,3,3,2]))
-# print(Solution().checkRotatedArray([6,10,6]))
-# print(Solution().isArraySpecial([2,1,4]))
-# print(Solution().plusOne([9, 9]))
-# print(Solution().longestCommonPrefix(["flower","flow","flight"]))
-# print("result",Solution().twoSum([2,7,11,15], 9))
-# print(Solution().isPalindrome(0))
-# print(Solution().removeDuplicates(nums = [0,0,1,1,1,2,2,3,3,4]))
-# print(Solution().removeElement([0,1,2,2,3,0,4,2], 3))
-# print(Solution().searchInsert([1,3,5,6], 5))
-# print(Solution().lengthOfLastWord("   fly me   to   the moon  "))
+    The test cases are generated so that, at any time, the product of any contiguous sequence of numbers will fit into a single 32-bit integer without overflowing.
+    '''
+
+    def __init__(self):
+
+        self.prefix_products = [1]
+
+    def add(self, num: int) -> None:
+
+        if num == 0:
+            self.prefix_products = [1]
+        else:
+            self.prefix_products.append(self.prefix_products[-1]*num)
+
+    def getProduct(self, k: int) -> int:
+
+        if k>=len(self.prefix_products):
+            return 0
+        return self.prefix_products[-1] // self.prefix_products[-(k+1)]
+
+productOfNumbers = ProductOfNumbers()
+productOfNumbers.add(3)        # [3]
+productOfNumbers.add(0)        # [3,0]
+productOfNumbers.add(2)        # [3,0,2]
+productOfNumbers.add(5)        # [3,0,2,5]
+productOfNumbers.add(4)        # [3,0,2,5,4]
+productOfNumbers.getProduct(2) # return 20. The product of the last 2 numbers is 5 * 4 = 20
+productOfNumbers.getProduct(3) # return 40. The product of the last 3 numbers is 2 * 5 * 4 = 40
+productOfNumbers.getProduct(4) # return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
+productOfNumbers.add(8)        # [3,0,2,5,4,8]
+productOfNumbers.getProduct(2) # return 32. The product of the last 2 numbers is 4 * 8 = 32 
