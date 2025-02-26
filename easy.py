@@ -519,9 +519,41 @@ class Solution:
         return op_num
 
 
+    def punishmentNumber(self, n: int) -> int:
+        '''
+        Given a positive integer n, return the punishment number of n. The punishment number of n is defined as the sum of the squares of all integers i such that:
 
+        1 <= i <= n
+        The decimal representation of i * i can be partitioned into contiguous substrings such that the sum of the integer values of these substrings equals i.
+        '''
 
-print(Solution().minOperations([2,11,10,1,3], 10))
+        def can_partition(s, target, index):
+            print("s", s, "target", target, "index", index)
+            if index == len(s):
+                return target == 0
+            
+            num = 0
+            for i in range(index, len(s)):
+                num = num * 10 + int(s[i])
+                print(f"num {num} int(s[i]) {int(s[i])} i {i}")
+                if num > target:
+                    break
+                if can_partition(s, target - num, i + 1):
+                    return True
+                return False
+            
+
+        pun_sum = 0
+        for i in range (1, n+1):
+            sq_string = str(i*i)
+            print("----------")
+            if can_partition(sq_string, i, 0):
+                pun_sum += + i*i
+
+        return pun_sum
+
+print(Solution().punishmentNumber(10))
+# print(Solution().minOperations([2,11,10,1,3], 10))
 # print(Solution().maximumSum([10,12,19,14]))
 # print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
 # print(Solution().tupleSameProduct([1,2,4,5,10]))
@@ -598,30 +630,27 @@ class ProductOfNumbers:
     '''
 
     def __init__(self):
-
         self.prefix_products = [1]
 
     def add(self, num: int) -> None:
-
         if num == 0:
             self.prefix_products = [1]
         else:
-            self.prefix_products.append(self.prefix_products[-1]*num)
+            self.prefix_products.append(self.prefix_products[-1] * num)
 
     def getProduct(self, k: int) -> int:
-
         if k>=len(self.prefix_products):
             return 0
-        return self.prefix_products[-1] // self.prefix_products[-(k+1)]
+        return self.prefix_products[-1] // self.prefix_products[-(k + 1)]
 
-productOfNumbers = ProductOfNumbers()
-productOfNumbers.add(3)        # [3]
-productOfNumbers.add(0)        # [3,0]
-productOfNumbers.add(2)        # [3,0,2]
-productOfNumbers.add(5)        # [3,0,2,5]
-productOfNumbers.add(4)        # [3,0,2,5,4]
-productOfNumbers.getProduct(2) # return 20. The product of the last 2 numbers is 5 * 4 = 20
-productOfNumbers.getProduct(3) # return 40. The product of the last 3 numbers is 2 * 5 * 4 = 40
-productOfNumbers.getProduct(4) # return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
-productOfNumbers.add(8)        # [3,0,2,5,4,8]
-productOfNumbers.getProduct(2) # return 32. The product of the last 2 numbers is 4 * 8 = 32 
+# productOfNumbers = ProductOfNumbers()
+# productOfNumbers.add(3)        # [3]
+# productOfNumbers.add(0)        # [3,0]
+# productOfNumbers.add(2)        # [3,0,2]
+# productOfNumbers.add(5)        # [3,0,2,5]
+# productOfNumbers.add(4)        # [3,0,2,5,4]
+# productOfNumbers.getProduct(2) # return 20. The product of the last 2 numbers is 5 * 4 = 20
+# productOfNumbers.getProduct(3) # return 40. The product of the last 3 numbers is 2 * 5 * 4 = 40
+# productOfNumbers.getProduct(4) # return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
+# productOfNumbers.add(8)        # [3,0,2,5,4,8]
+# productOfNumbers.getProduct(2) # return 32. The product of the last 2 numbers is 4 * 8 = 32
