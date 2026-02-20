@@ -519,9 +519,42 @@ class Solution:
         return op_num
 
 
+    # def punishmentNumber(self, n: int) -> int:
+    #     '''
+    #     Given a positive integer n, return the punishment number of n. The punishment number of n is defined as the sum of the squares of all integers i such that:
 
+    #     1 <= i <= n
+    #     The decimal representation of i * i can be partitioned into contiguous substrings such that the sum of the integer values of these substrings equals i.
+    #     '''
+    #     from math import sqrt
+    #     sp_sq = []
 
-print(Solution().minOperations([2,11,10,1,3], 10))
+    #     for i in range(0, n/2):
+    #         print(sqrt(i))
+    #         # print(type(sqrt(i)))
+    #         # if type(sqrt(i)) == int:
+    #             # print(i)
+
+    # def threeNumbers(self, nums: list[int]) -> bool:
+    #     '''
+    #     Given a list, determine if three numbers in that list can be added or subtracted to give 0.
+    #     '''
+    #     if len(nums) < 3:
+    #         return False
+        
+    #     # for i in range(len(nums)-2):
+    #     #     for j in range(i+1, len(nums)-1):
+    #     #         for k in range(j+1, len(nums)):
+    #     #             if nums[i] + nums[j] + nums[k] == 0 or nums[i] + nums[j] - nums[k] == 0 or nums[i] - nums[j] + nums[k] == 0 or -nums[i] + nums[j] + nums[k] == 0 or nums[i] - nums[j] - nums[k] == 0 or -nums[i] + nums[j] - nums[k] == 0 or -nums[i] - nums[j] + nums[k] == 0 or -nums[i] - nums[j] - nums[k] == 0:
+    #     #                 print(nums[i], nums[j], nums[k])
+    #     #                 return True
+    #     # return False
+
+        
+
+# print(Solution().threeNumbers([3,1,1]))
+# print(Solution().punishmentNumber(27))
+# print(Solution().minOperations([2,11,10,1,3], 10))
 # print(Solution().maximumSum([10,12,19,14]))
 # print(Solution().queryResults(1, [[0,1],[0,4],[1,2],[1,5],[1,4]]))
 # print(Solution().tupleSameProduct([1,2,4,5,10]))
@@ -614,14 +647,14 @@ class ProductOfNumbers:
             return 0
         return self.prefix_products[-1] // self.prefix_products[-(k+1)]
 
-productOfNumbers = ProductOfNumbers()
-productOfNumbers.add(3)        # [3]
-productOfNumbers.add(0)        # [3,0]
-productOfNumbers.add(2)        # [3,0,2]
-productOfNumbers.add(5)        # [3,0,2,5]
-productOfNumbers.add(4)        # [3,0,2,5,4]
-productOfNumbers.getProduct(2) # return 20. The product of the last 2 numbers is 5 * 4 = 20
-productOfNumbers.getProduct(3) # return 40. The product of the last 3 numbers is 2 * 5 * 4 = 40
-productOfNumbers.getProduct(4) # return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
-productOfNumbers.add(8)        # [3,0,2,5,4,8]
-productOfNumbers.getProduct(2) # return 32. The product of the last 2 numbers is 4 * 8 = 32 
+# productOfNumbers = ProductOfNumbers()
+# productOfNumbers.add(3)        # [3]
+# productOfNumbers.add(0)        # [3,0]
+# productOfNumbers.add(2)        # [3,0,2]
+# productOfNumbers.add(5)        # [3,0,2,5]
+# productOfNumbers.add(4)        # [3,0,2,5,4]
+# productOfNumbers.getProduct(2) # return 20. The product of the last 2 numbers is 5 * 4 = 20
+# productOfNumbers.getProduct(3) # return 40. The product of the last 3 numbers is 2 * 5 * 4 = 40
+# productOfNumbers.getProduct(4) # return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
+# productOfNumbers.add(8)        # [3,0,2,5,4,8]
+# productOfNumbers.getProduct(2) # return 32. The product of the last 2 numbers is 4 * 8 = 32 
