@@ -1,3 +1,2 @@
 env
 *.pyc
-.mypy_cache
